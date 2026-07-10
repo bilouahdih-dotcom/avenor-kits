@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>La Braise Dorée — Grillades au feu de bois · Paris</title>
+<meta name="description" content="La Braise Dorée, restaurant de grillades au feu de bois au 12 rue de la République, 75011 Paris. Viandes maturées, brochettes, plats généreux et desserts maison. Sur place et à emporter." />
+<style>
+  :root{
+    /* ===== COULEURS — modifiez ici pour changer tout le site ===== */
+    --bg:#120d0a;          /* fond principal */
+    --bg-soft:#1c1410;     /* fond sections alternées */
+    --card:#211913;        /* fond cartes */
+    --cream:#f6efe4;       /* texte principal */
+    --muted:#bfae98;       /* texte secondaire */
+    --ember:#e2562a;       /* couleur accent 1 (boutons) */
+    --ember-2:#f59324;     /* couleur accent 2 (dégradés) */
+    --gold:#d9a441;        /* couleur or (prix, titres) */
+    --line:rgba(255,255,255,.08);
+    --max:1180px;
+    --font-display:"Georgia","Times New Roman",serif;
+    --font-body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-body);
+    background:var(--bg);
+    color:var(--cream);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .display{font-family:var(--font-display);letter-spacing:.5px}
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:3px;font-size:12px;
+    color:var(--gold);font-weight:700;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(18,13,10,.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:12px;font-family:var(--font-display)}
+  .brand .mark{
+    width:42px;height:42px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%,var(--ember-2),var(--ember) 60%,#7a2410);
+    display:grid;place-items:center;
+    box-shadow:0 0 18px rgba(226,86,42,.5);
+  }
+  .brand .mark svg{width:22px;height:22px;fill:#fff;stroke:none;filter:drop-shadow(0 1px 2px rgba(0,0,0,.3))}
+  .brand b{font-size:20px;letter-spacing:1px}
+  .brand span{display:block;font-size:10px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;font-family:var(--font-body)}
+  nav ul{display:flex;gap:28px;list-style:none;font-size:14px;font-weight:500}
+  nav ul a{color:var(--muted);transition:color .2s}
+  nav ul a:hover{color:var(--cream)}
+  .btn{
+    display:inline-block;padding:12px 22px;border-radius:999px;font-weight:700;
+    font-size:14px;cursor:pointer;border:none;transition:transform .15s,box-shadow .2s;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--ember-2),var(--ember));
+    color:#fff;box-shadow:0 8px 22px rgba(226,86,42,.35);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(226,86,42,.45)}
+  .btn-ghost{background:transparent;color:var(--cream);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+  .nav-cta{display:flex;gap:12px;align-items:center}
+  .burger{display:none;background:none;border:none;color:var(--cream);font-size:26px;cursor:pointer}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;overflow:hidden;padding:120px 0 130px;text-align:center;
+    background:#120d0a url('images/hero.jpg') center/cover no-repeat;}
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(900px 500px at 50% -10%,rgba(226,86,42,.35),transparent 60%),
+      linear-gradient(180deg,rgba(18,13,10,.72),rgba(18,13,10,.88) 55%,rgba(18,13,10,.96));
+    z-index:0;
+  }
+  .hero .wrap{position:relative;z-index:1}
+  .hero h1{font-family:var(--font-display);font-size:clamp(40px,7vw,76px);line-height:1.05;margin:18px 0 20px}
+  .hero h1 em{color:var(--ember-2);font-style:normal}
+  .hero p.lead{max-width:640px;margin:0 auto 32px;color:var(--muted);font-size:18px}
+  .hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .badges{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-top:46px;color:var(--muted);font-size:13px}
+  .badges b{color:var(--gold);font-size:22px;display:block;font-family:var(--font-display)}
+  .badges>div{text-align:center}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:88px 0}
+  .sec-head{text-align:center;max-width:620px;margin:0 auto 54px}
+  .sec-head h2{font-family:var(--font-display);font-size:clamp(30px,4.5vw,44px);margin:12px 0}
+  .sec-head p{color:var(--muted)}
+
+  /* ---------- À PROPOS ---------- */
+  .about{background:var(--bg-soft)}
+  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:center}
+  .about-grid h2{font-family:var(--font-display);font-size:clamp(28px,4vw,40px);margin:14px 0 18px}
+  .about-grid p{color:var(--muted);margin-bottom:16px}
+  .about-art{
+    aspect-ratio:4/5;border-radius:18px;border:1px solid var(--line);
+    background-color:#2a1c12;
+    background-image:
+      radial-gradient(circle at 70% 20%,rgba(245,147,36,.5),transparent 45%),
+      linear-gradient(160deg,#2a1c12,#160f0b);
+    position:relative;overflow:hidden;display:grid;place-items:center;
+    background-size:cover;background-position:center;
+  }
+  .feature-list{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
+  .feature-list .f{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .feature-list .f i{display:block;margin-bottom:12px;color:var(--ember-2)}
+  .feature-list .f i svg{width:28px;height:28px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .feature-list .f b{display:block;margin-bottom:2px}
+  .feature-list .f small{color:var(--muted)}
+
+  /* ---------- MENU ---------- */
+  .menu-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+  .menu-tabs button{
+    background:var(--card);border:1px solid var(--line);color:var(--muted);
+    padding:10px 20px;border-radius:999px;cursor:pointer;font-weight:600;font-size:14px;transition:.2s;
+  }
+  .menu-tabs button.active{background:linear-gradient(135deg,var(--ember-2),var(--ember));color:#fff;border-color:transparent}
+  .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .panel{display:none}
+  .panel.active{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .dish{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;
+    display:flex;justify-content:space-between;gap:16px;transition:.2s;
+  }
+  .dish:hover{border-color:rgba(217,164,65,.5);transform:translateY(-2px)}
+  .dish h4{font-size:17px;margin-bottom:5px;display:flex;align-items:center;gap:8px}
+  .dish p{color:var(--muted);font-size:13.5px;line-height:1.5}
+  .dish .price{font-family:var(--font-display);color:var(--gold);font-size:19px;white-space:nowrap}
+  .tag{font-size:10px;text-transform:uppercase;letter-spacing:1px;padding:2px 7px;border-radius:6px;background:rgba(226,86,42,.18);color:var(--ember-2);font-weight:700}
+  .menu-note{text-align:center;color:var(--muted);font-size:13px;margin-top:30px}
+
+  /* ---------- GALERIE ---------- */
+  .gallery{background:var(--bg-soft)}
+  .marquee{position:relative;width:100%;overflow:hidden;padding:30px 0;
+    -webkit-mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);
+    mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);}
+  .marquee-track{display:flex;width:max-content;animation:marquee 45s linear infinite}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .marquee-item{position:relative;flex:0 0 auto;margin-right:22px;width:230px;aspect-ratio:3/4;border-radius:20px;
+    overflow:hidden;border:1px solid var(--line);box-shadow:0 16px 36px rgba(0,0,0,.45);
+    transition:transform .3s ease;background-size:cover;background-position:center;background-color:#1a1410}
+  .marquee-item:nth-child(odd){transform:rotate(-2deg)}
+  .marquee-item:nth-child(even){transform:rotate(3deg)}
+  .marquee-item:hover{transform:rotate(0) scale(1.04);z-index:3}
+  .marquee-item .cap{position:absolute;left:0;right:0;bottom:0;padding:24px 14px 12px;
+    font-size:13px;font-weight:600;color:#fff;z-index:2;
+    background:linear-gradient(to top,rgba(0,0,0,.75),transparent)}
+
+  /* ---------- AVIS ---------- */
+  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .review{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+  .review .stars{color:var(--gold);margin-bottom:10px;letter-spacing:2px}
+  .review p{font-size:14.5px;margin-bottom:14px}
+  .review .who{display:flex;align-items:center;gap:10px}
+  .review .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--ember),var(--gold));display:grid;place-items:center;font-weight:700;color:#1a120c}
+  .review .who b{font-size:14px}
+  .review .who small{color:var(--muted);display:block;font-size:12px}
+
+  /* ---------- INFOS / CONTACT ---------- */
+  .info{background:var(--bg-soft)}
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+  .info-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px}
+  .info-card h3{font-family:var(--font-display);font-size:24px;margin-bottom:20px}
+  .hours{list-style:none}
+  .hours li{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+  .hours li:last-child{border:none}
+  .hours li.today{color:var(--gold);font-weight:700}
+  .contact-line{display:flex;gap:12px;align-items:flex-start;margin-bottom:18px}
+  .contact-line i{color:var(--ember-2);flex:0 0 auto;margin-top:2px}
+  .contact-line i svg{width:22px;height:22px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .contact-line b{display:block}
+  .contact-line small{color:var(--muted)}
+  .map{
+    margin-top:18px;border-radius:14px;border:1px solid var(--line);overflow:hidden;
+    position:relative;box-shadow:0 14px 34px rgba(0,0,0,.45);background:#1a1410;
+  }
+  .map iframe{display:block;width:100%;height:260px;border:0;filter:grayscale(.2) contrast(1.05)}
+
+  /* ---------- CTA BANNER ---------- */
+  .cta{
+    text-align:center;
+    background:linear-gradient(135deg,rgba(226,86,42,.18),rgba(217,164,65,.12));
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .cta h2{font-family:var(--font-display);font-size:clamp(28px,4vw,42px);margin-bottom:14px}
+  .cta p{color:var(--muted);margin-bottom:26px}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:54px 0 30px;font-size:14px}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;margin-bottom:34px}
+  .foot-grid p{color:var(--muted);margin-top:12px;max-width:320px}
+  .foot-grid h5{text-transform:uppercase;letter-spacing:2px;font-size:12px;color:var(--gold);margin-bottom:14px}
+  .foot-grid ul{list-style:none}
+  .foot-grid ul li{margin-bottom:9px;color:var(--muted)}
+  .foot-grid ul a:hover{color:var(--cream)}
+  .socials{display:flex;gap:12px;margin-top:16px}
+  .socials a{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;transition:.2s}
+  .socials a:hover{border-color:var(--gold);color:var(--gold)}
+  .foot-bottom{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;color:var(--muted);font-size:12.5px;flex-wrap:wrap;gap:8px}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:860px){
+    nav ul,.nav-cta .btn-ghost{display:none}
+    .burger{display:block}
+    .about-grid,.info-grid,.foot-grid{grid-template-columns:1fr}
+    .menu-grid,.panel.active{grid-template-columns:1fr}
+    .reviews-grid{grid-template-columns:1fr}
+    .marquee-item{width:170px}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#">
+      <span class="mark"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span>
+      <div><b>LA BRAISE DORÉE</b><span>Grillades au feu de bois</span></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#about">Le restaurant</a></li>
+        <li><a href="#menu">La carte</a></li>
+        <li><a href="#gallery">Galerie</a></li>
+        <li><a href="#reviews">Avis</a></li>
+        <li><a href="#info">Infos & accès</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:+33123456789" class="btn btn-ghost">📞 Réserver</a>
+      <a href="#menu" class="btn btn-primary">Voir la carte</a>
+      <button class="burger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Restaurant · Paris 11e</p>
+    <h1>Le vrai goût de la <em>braise</em>,<br>depuis 1998.</h1>
+    <p class="lead">Grillades au feu de bois, viandes sélectionnées et plats généreux préparés maison. Une cuisine authentique et conviviale, à partager en famille ou entre amis.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn btn-primary">Voir la carte</a>
+      <a href="#info" class="btn btn-ghost">Réserver une table</a>
+    </div>
+    <div class="badges">
+      <div><b>4,8★</b>230 avis Google</div>
+      <div><b>Feu de bois</b>Grillades à la braise</div>
+      <div><b>Maison</b>Produits frais</div>
+      <div><b>23h00</b>Ouvert midi & soir</div>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div>
+      <p class="eyebrow">Notre histoire</p>
+      <h2>Une cuisine généreuse, grillée à la braise</h2>
+      <p>Chez <b>La Braise Dorée</b>, tout commence par le feu. Nos viandes sont marinées chaque matin selon nos recettes maison, puis grillées au charbon de bois pour révéler ce parfum fumé unique.</p>
+      <p>Des brochettes tendres aux plats mijotés, en passant par nos entrées préparées maison, nous servons une cuisine authentique, conviviale et généreuse — à partager en famille ou entre amis.</p>
+      <div class="feature-list">
+        <div class="f"><i><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></i><b>Feu de bois</b><small>Grillé à la braise</small></div>
+        <div class="f"><i><svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></i><b>Viande fraîche</b><small>Sélectionnée chaque jour</small></div>
+        <div class="f"><i><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></i><b>Menu enfant</b><small>En famille</small></div>
+        <div class="f"><i><svg viewBox="0 0 24 24"><rect width="20" height="15" x="2" y="7" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg></i><b>Grandes tablées</b><small>Groupes bienvenus</small></div>
+        <div class="f"><i><svg viewBox="0 0 24 24"><path d="M4 21h16"/><path d="M5 21v-7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7"/><path d="M5 14c1.6 0 1.6 1.4 3.2 1.4S9.8 14 11.4 14s1.6 1.4 3.2 1.4S16.2 14 17.8 14"/><path d="M12 9V6.5"/><circle cx="12" cy="5" r="1"/></svg></i><b>Desserts maison</b><small>Faits sur place</small></div>
+        <div class="f"><i><svg viewBox="0 0 24 24"><path d="M3 17h18"/><path d="M4 17a8 8 0 0 1 16 0"/><path d="M12 8V5"/><circle cx="12" cy="4" r="1"/></svg></i><b>Traiteur</b><small>Événements & groupes</small></div>
+      </div>
+    </div>
+    <div class="about-art" style="background-image:url('images/plat-signature.jpg')" role="img" aria-label="Plat signature de la maison"></div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Notre carte</p>
+      <h2>Les spécialités de la maison</h2>
+      <p>Une sélection de nos plats préparés à la commande, avec des produits frais.</p>
+    </div>
+
+    <div class="menu-tabs">
+      <button class="active" data-tab="entrees">🥗 Entrées</button>
+      <button data-tab="plats">🍽️ Plats</button>
+      <button data-tab="grill">🔥 Grillades</button>
+      <button data-tab="dessert">🍮 Desserts & boissons</button>
+    </div>
+
+    <!-- Entrées -->
+    <div class="panel active" data-panel="entrees">
+      <div class="dish">
+        <div><h4>Salade de chèvre chaud</h4><p>Toasts de chèvre rôti au miel, salade croquante, noix et vinaigrette maison.</p></div>
+        <div class="price">8,50 €</div>
+      </div>
+      <div class="dish">
+        <div><h4>Soupe du jour <span class="tag">Maison</span></h4><p>Préparée chaque matin avec les légumes de saison.</p></div>
+        <div class="price">6,50 €</div>
+      </div>
+      <div class="dish">
+        <div><h4>Assiette de charcuterie</h4><p>Sélection de charcuteries artisanales, cornichons et pain grillé.</p></div>
+        <div class="price">9,50 €</div>
+      </div>
+      <div class="dish">
+        <div><h4>Burrata crémeuse</h4><p>Burrata, tomates confites, basilic frais et huile d'olive.</p></div>
+        <div class="price">9,00 €</div>
+      </div>
+    </div>
+
+    <!-- Plats -->
+    <div class="panel" data-panel="plats">
+      <div class="dish">
+        <div><h4>Plat signature de la maison <span class="tag">Signature</span></h4><p>Notre grande assiette mixte : trois viandes grillées, servies avec frites maison et salade.</p></div>
+        <div class="price">19,50 €</div>
+      </div>
+      <div class="dish">
+        <div><h4>Burger de la maison</h4><p>Pain artisanal, steak grillé à la braise, cheddar affiné, sauce secrète et frites maison.</p></div>
+        <div class="price">15,50 €</div>
+      </div>
+      <div class="dish">
+        <div><h4>Poisson du jour</h4><p>Selon l'arrivage, grillé entier et servi avec légumes de saison.</p></div>
+        <div class="price">17,00 €</div>
+      </div>
+      <div class="dish">
+        <div><h4>Risotto aux champignons</h4><p>Riz crémeux, champignons poêlés et copeaux de parmesan.</p></div>
+        <div class="price">14,00 €</div>
+      </div>
+    </div>
+
+    <!-- Grillades -->
+    <div class="panel" data-panel="grill">
+      <div class="dish">
+        <div><h4>Entrecôte grillée (300g) <span class="tag">Signature</span></h4><p>Maturée et grillée au feu de bois, beurre maître d'hôtel, frites maison.</p></div>
+        <div class="price">24,50 €</div>
+      </div>
+      <div class="dish">
+        <div><h4>Brochettes de bœuf</h4><p>Morceaux de bœuf marinés et grillés à la braise, riz ou frites.</p></div>
+        <div class="price">18,50 €</div>
+      </div>
+      <div class="dish">
+        <div><h4>Brochette de poulet mariné</h4><p>Poulet fermier mariné aux épices douces, grillé à la braise.</p></div>
+        <div class="price">15,50 €</div>
+      </div>
+      <div class="dish">
+        <div><h4>Côtelettes d'agneau</h4><p>Côtelettes tendres grillées, pour le pur goût de la viande.</p></div>
+        <div class="price">21,50 €</div>
+      </div>
+      <div class="dish">
+        <div><h4>Mixed grill à partager (2 pers.) <span class="tag">À partager</span></h4><p>Le meilleur du grill : bœuf, poulet, agneau et saucisses, accompagnements au choix.</p></div>
+        <div class="price">42,00 €</div>
+      </div>
+    </div>
+
+    <!-- Desserts & boissons -->
+    <div class="panel" data-panel="dessert">
+      <div class="dish">
+        <div><h4>Fondant au chocolat <span class="tag">Maison</span></h4><p>Cœur coulant, servi tiède avec sa boule de glace vanille.</p></div>
+        <div class="price">7,50 €</div>
+      </div>
+      <div class="dish">
+        <div><h4>Crème brûlée</h4><p>À la vanille de Madagascar, caramélisée à la minute.</p></div>
+        <div class="price">6,90 €</div>
+      </div>
+      <div class="dish">
+        <div><h4>Tarte du jour</h4><p>Préparée le matin même, selon les fruits de saison.</p></div>
+        <div class="price">6,50 €</div>
+      </div>
+      <div class="dish">
+        <div><h4>Café gourmand</h4><p>Expresso et son assortiment de mignardises maison.</p></div>
+        <div class="price">8,00 €</div>
+      </div>
+      <div class="dish">
+        <div><h4>Jus pressés minute</h4><p>Orange, citron ou pomme, pressés à la commande.</p></div>
+        <div class="price">4,50 €</div>
+      </div>
+      <div class="dish">
+        <div><h4>Café / Thé</h4><p>Expresso, allongé, cappuccino ou sélection de thés.</p></div>
+        <div class="price">2,50 €</div>
+      </div>
+    </div>
+
+    <p class="menu-note">Préparé à la commande · Produits frais · Ticket Restaurant accepté · Allergènes sur demande.</p>
+  </div>
+</section>
+
+<!-- GALERIE -->
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">En images</p>
+      <h2>L'ambiance & les plats</h2>
+      <p>Un aperçu de nos spécialités et de l'ambiance du restaurant.</p>
+    </div>
+    <div class="marquee">
+      <div class="marquee-track">
+        <!-- 1er jeu -->
+        <div class="marquee-item" style="background-image:url('images/galerie-1.jpg')"><span class="cap">Grillades à la braise</span></div>
+        <div class="marquee-item" style="background-image:url('images/galerie-2.jpg')"><span class="cap">Salle du restaurant</span></div>
+        <div class="marquee-item" style="background-image:url('images/galerie-3.jpg')"><span class="cap">Burger maison</span></div>
+        <div class="marquee-item" style="background-image:url('images/galerie-4.jpg')"><span class="cap">Assiette garnie</span></div>
+        <div class="marquee-item" style="background-image:url('images/galerie-5.jpg')"><span class="cap">Fondant au chocolat</span></div>
+        <div class="marquee-item" style="background-image:url('images/galerie-6.jpg')"><span class="cap">Entrecôte grillée</span></div>
+        <div class="marquee-item" style="background-image:url('images/galerie-7.jpg')"><span class="cap">Café gourmand</span></div>
+        <!-- 2e jeu (copie pour boucle continue) -->
+        <div class="marquee-item" aria-hidden="true" style="background-image:url('images/galerie-1.jpg')"><span class="cap">Grillades à la braise</span></div>
+        <div class="marquee-item" aria-hidden="true" style="background-image:url('images/galerie-2.jpg')"><span class="cap">Salle du restaurant</span></div>
+        <div class="marquee-item" aria-hidden="true" style="background-image:url('images/galerie-3.jpg')"><span class="cap">Burger maison</span></div>
+        <div class="marquee-item" aria-hidden="true" style="background-image:url('images/galerie-4.jpg')"><span class="cap">Assiette garnie</span></div>
+        <div class="marquee-item" aria-hidden="true" style="background-image:url('images/galerie-5.jpg')"><span class="cap">Fondant au chocolat</span></div>
+        <div class="marquee-item" aria-hidden="true" style="background-image:url('images/galerie-6.jpg')"><span class="cap">Entrecôte grillée</span></div>
+        <div class="marquee-item" aria-hidden="true" style="background-image:url('images/galerie-7.jpg')"><span class="cap">Café gourmand</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVIS -->
+<section id="reviews">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Ils ont aimé</p>
+      <h2>Ce que disent nos clients</h2>
+      <p>Note Google : 4,8 ★ sur 230 avis.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>« La meilleure entrecôte du quartier, sans hésiter. La viande est fondante et les frites maison sont incroyables. Accueil au top. »</p>
+        <div class="who"><span class="av">M</span><div><b>Marc D.</b><small>Avis Google · il y a 2 semaines</small></div></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>« On a pris le mixed grill à partager, énorme et délicieux. Les entrées faites maison font la différence. On reviendra ! »</p>
+        <div class="who"><span class="av">S</span><div><b>Sarah L.</b><small>Avis Google · il y a 1 mois</small></div></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★☆</div>
+        <p>« Très bon burger et fondant au chocolat parfait. Cadre simple mais chaleureux, parfait en famille. »</p>
+        <div class="who"><span class="av">K</span><div><b>Kevin D.</b><small>Avis Google · il y a 3 mois</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFOS -->
+<section class="info" id="info">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Nous trouver</p>
+      <h2>Infos & accès</h2>
+    </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Horaires d'ouverture</h3>
+        <ul class="hours">
+          <li><span>Lundi</span><span style="color:var(--muted)">Fermé</span></li>
+          <li><span>Mardi</span><span>12h00 – 14h30 · 19h00 – 23h00</span></li>
+          <li><span>Mercredi</span><span>12h00 – 14h30 · 19h00 – 23h00</span></li>
+          <li><span>Jeudi</span><span>12h00 – 14h30 · 19h00 – 23h00</span></li>
+          <li><span>Vendredi</span><span>12h00 – 14h30 · 19h00 – 23h30</span></li>
+          <li><span>Samedi</span><span>12h00 – 23h30</span></li>
+          <li><span>Dimanche</span><span>12h00 – 22h00</span></li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Coordonnées</h3>
+        <div class="contact-line"><i><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></i><div><b>Adresse</b><small>12 rue de la République, 75011 Paris</small></div></div>
+        <div class="contact-line"><i><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></i><div><b>Téléphone</b><small>01 23 45 67 89</small></div></div>
+        <div class="contact-line"><i><svg viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></i><div><b>Services</b><small>Sur place · À emporter · Traiteur</small></div></div>
+        <div class="contact-line"><i><svg viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></i><div><b>Paiement</b><small>CB · Ticket Restaurant · Espèces</small></div></div>
+        <div class="contact-line"><i><svg viewBox="0 0 24 24"><circle cx="16" cy="4" r="1"/><path d="m18 19 1-7-6 1"/><path d="m5 8 3-3 5.5 3-2.36 3.5"/><path d="M4.24 14.5a5 5 0 0 0 6.88 6"/><path d="M13.76 17.5a5 5 0 0 0-6.88-6"/></svg></i><div><b>Accessibilité</b><small>Entrée & salle accessibles PMR · Wi-Fi gratuit · Familles bienvenues</small></div></div>
+        <div class="map">
+          <!-- Carte OpenStreetMap : voir PERSONNALISATION.md pour la remplacer par l'adresse du client -->
+          <iframe title="Carte d'accès" src="https://www.openstreetmap.org/export/embed.html?bbox=2.3688%2C48.8595%2C2.3838%2C48.8665&amp;layer=mapnik&amp;marker=48.8630%2C2.3763" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap">
+    <p class="eyebrow">Réservation</p>
+    <h2>Une table vous attend à La Braise Dorée</h2>
+    <p>Réservez par téléphone ou passez nous voir — nous vous accueillons midi et soir.</p>
+    <div class="hero-actions">
+      <a href="tel:+33123456789" class="btn btn-primary">📞 01 23 45 67 89</a>
+      <a href="#menu" class="btn btn-ghost">Voir la carte</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#"><span class="mark"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span><div><b>LA BRAISE DORÉE</b><span>Grillades au feu de bois</span></div></a>
+        <p>Restaurant de grillades au feu de bois à Paris. Viandes sélectionnées, plats généreux et desserts maison.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="TikTok">♪</a>
+        </div>
+      </div>
+      <div>
+        <h5>Navigation</h5>
+        <ul>
+          <li><a href="#about">Le restaurant</a></li>
+          <li><a href="#menu">La carte</a></li>
+          <li><a href="#gallery">Galerie</a></li>
+          <li><a href="#reviews">Avis</a></li>
+          <li><a href="#info">Infos & accès</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li>12 rue de la République</li>
+          <li>75011 Paris</li>
+          <li>01 23 45 67 89</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 La Braise Dorée.</span>
+      <span>Tous droits réservés.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Onglets menu
+  document.querySelectorAll('.menu-tabs button').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.menu-tabs button').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelector('[data-panel="'+btn.dataset.tab+'"]').classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

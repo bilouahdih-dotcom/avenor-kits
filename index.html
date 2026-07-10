@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Avenor Kits — Kit Site Restaurant : un site vitrine pro prêt en 1 heure</title>
+<meta name="description" content="Kit Site Restaurant : template HTML complet + guides de personnalisation et de mise en ligne gratuite. Livrez un site vitrine pro à vos clients restaurateurs en 1 heure, sans abonnement. 29 €, licence clients illimités." />
+<style>
+  :root{
+    --bg:#0a0a0b;
+    --bg-soft:#111113;
+    --card:#17171a;
+    --white:#f4f4f5;
+    --muted:#9a9aa2;
+    --silver:#e8e8ea;
+    --line:rgba(255,255,255,.08);
+    --accent:#e2562a; /* rappel braise du produit */
+    --max:1120px;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);background:var(--bg);color:var(--white);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .silver-text{
+    background:linear-gradient(180deg,#ffffff 0%,#d6d6db 45%,#8f8f98 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .eyebrow{text-transform:uppercase;letter-spacing:3px;font-size:12px;color:var(--muted);font-weight:700}
+  .btn{display:inline-block;padding:14px 28px;border-radius:12px;font-weight:700;font-size:15px;cursor:pointer;border:none;transition:transform .15s,box-shadow .2s}
+  .btn-primary{background:linear-gradient(180deg,#fafafa,#c9c9cf);color:#0a0a0b;box-shadow:0 8px 26px rgba(255,255,255,.12)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,255,255,.18)}
+  .btn-ghost{background:transparent;color:var(--white);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--silver)}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(10,10,11,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{font-weight:800;letter-spacing:2px;font-size:17px}
+  .brand small{display:block;font-size:9px;letter-spacing:4px;color:var(--muted);font-weight:600}
+  .nav-right{display:flex;gap:12px;align-items:center}
+  .nav-right a.link{color:var(--muted);font-size:14px;font-weight:500}
+  .nav-right a.link:hover{color:var(--white)}
+
+  .hero{padding:100px 0 70px;text-align:center;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(800px 400px at 50% -10%,rgba(255,255,255,.07),transparent 60%);pointer-events:none}
+  .hero h1{font-size:clamp(36px,6vw,64px);line-height:1.08;font-weight:800;letter-spacing:-1px;margin:16px 0 22px}
+  .hero p.lead{max-width:640px;margin:0 auto 34px;color:var(--muted);font-size:19px}
+  .hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .hero .price-hint{margin-top:18px;color:var(--muted);font-size:14px}
+  .hero .price-hint b{color:var(--white)}
+
+  .preview{padding:30px 0 90px}
+  .browser-frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6);background:var(--card)}
+  .browser-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:#141416}
+  .browser-bar span{width:11px;height:11px;border-radius:50%;background:#2c2c30}
+  .browser-bar .url{flex:1;margin-left:12px;background:#0f0f11;border:1px solid var(--line);border-radius:8px;padding:5px 14px;font-size:12.5px;color:var(--muted);text-align:center}
+  .browser-frame iframe{display:block;width:100%;height:560px;border:0}
+  .preview-note{text-align:center;margin-top:18px;color:var(--muted);font-size:14px}
+  .preview-note a{color:var(--silver);text-decoration:underline}
+
+  section{padding:88px 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 54px}
+  .sec-head h2{font-size:clamp(28px,4.5vw,42px);font-weight:800;letter-spacing:-.5px;margin:12px 0}
+  .sec-head p{color:var(--muted)}
+  .alt{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px}
+  .card .ico{font-size:26px;margin-bottom:14px;display:block}
+  .card b{display:block;font-size:17px;margin-bottom:6px}
+  .card p{color:var(--muted);font-size:14.5px}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:step}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;position:relative}
+  .step::before{counter-increment:step;content:counter(step);position:absolute;top:-18px;left:24px;width:36px;height:36px;border-radius:50%;background:linear-gradient(180deg,#fafafa,#c9c9cf);color:#0a0a0b;font-weight:800;display:grid;place-items:center;font-size:16px}
+  .step b{display:block;margin:8px 0 6px;font-size:16px}
+  .step p{color:var(--muted);font-size:14.5px}
+  .step small{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:2px}
+
+  .pricing-card{max-width:480px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:40px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .pricing-card .price{font-size:56px;font-weight:800;letter-spacing:-2px;margin:10px 0}
+  .pricing-card .price small{font-size:16px;color:var(--muted);font-weight:500;letter-spacing:0}
+  .pricing-card ul{list-style:none;text-align:left;margin:26px 0 30px}
+  .pricing-card ul li{padding:9px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--muted)}
+  .pricing-card ul li::before{content:"✓  ";color:var(--silver);font-weight:700}
+  .pricing-card ul li:last-child{border:none}
+  .pricing-card .btn{width:100%}
+  .pricing-card .guarantee{margin-top:14px;font-size:12.5px;color:var(--muted)}
+
+  details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 24px;margin-bottom:12px}
+  details summary{cursor:pointer;font-weight:600;font-size:15.5px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  details summary::after{content:"+";font-size:22px;color:var(--muted);transition:transform .2s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{margin-top:12px;color:var(--muted);font-size:14.5px}
+  .faq-list{max-width:720px;margin:0 auto}
+
+  footer{padding:50px 0 30px;font-size:13.5px;color:var(--muted);border-top:1px solid var(--line)}
+  .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  @media(max-width:860px){
+    .grid-3,.grid-2,.steps{grid-template-columns:1fr}
+    .steps{gap:32px}
+    .browser-frame iframe{height:420px}
+    .nav-right a.link{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#"><span class="silver-text">AVENOR KITS</span><small>SITES PRÊTS À LIVRER</small></a>
+    <div class="nav-right">
+      <a class="link" href="#contenu">Contenu</a>
+      <a class="link" href="#faq">FAQ</a>
+      <a class="btn btn-primary" href="#acheter">Obtenir le kit — 29 €</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Kit Site Restaurant · Template HTML + Guides</p>
+    <h1><span class="silver-text">Un site restaurant pro,<br>livré en 1 heure.</span></h1>
+    <p class="lead">Template complet, prêt à personnaliser et à mettre en ligne gratuitement. Pour les freelances qui veulent livrer vite, et les restaurateurs qui veulent un vrai site sans abonnement.</p>
+    <div class="hero-actions">
+      <a href="#acheter" class="btn btn-primary">Obtenir le kit — 29 €</a>
+      <a href="demo-restaurant/" target="_blank" rel="noopener" class="btn btn-ghost">Voir la démo en ligne ↗</a>
+    </div>
+    <p class="price-hint">Paiement unique · <b>Clients illimités</b> · Téléchargement immédiat</p>
+  </div>
+</section>
+
+<div class="preview">
+  <div class="wrap">
+    <div class="browser-frame">
+      <div class="browser-bar"><span></span><span></span><span></span><div class="url">la-braise-doree.fr — démo du kit</div></div>
+      <iframe src="demo-restaurant/" title="Démo du Kit Site Restaurant" loading="lazy"></iframe>
+    </div>
+    <p class="preview-note">Démo interactive — <a href="demo-restaurant/" target="_blank" rel="noopener">ouvrir en plein écran</a>. Chaque élément (nom, carte, photos, couleurs) se personnalise en quelques minutes.</p>
+  </div>
+</div>
+
+<section class="alt" id="contenu">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Dans le kit</p>
+      <h2><span class="silver-text">Tout ce qu'il faut pour livrer</span></h2>
+      <p>Pas juste un template : un système complet, de la personnalisation à la mise en ligne.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card"><span class="ico">🎨</span><b>Template premium</b><p>Design sombre "braise" avec galerie animée, carte par onglets, avis clients, horaires et carte d'accès. Un seul fichier HTML, zéro dépendance.</p></div>
+      <div class="card"><span class="ico">✏️</span><b>Guide de personnalisation</b><p>Checklist pas à pas : nom, carte du restaurant, horaires, avis, carte d'accès. 30 minutes avec un simple éditeur de texte.</p></div>
+      <div class="card"><span class="ico">🚀</span><b>Guide de mise en ligne</b><p>Hébergement 100 % gratuit et illimité sur GitHub Pages, HTTPS inclus. Pas à pas avec captures, aucune compétence serveur requise.</p></div>
+      <div class="card"><span class="ico">🎨</span><b>3 palettes de couleurs</b><p>Ambiance grill, italien, japonais ou bistrot chic : 3 variables CSS à changer et tout le site suit.</p></div>
+      <div class="card"><span class="ico">📷</span><b>Guide photos</b><p>Quelles photos utiliser, où en trouver des gratuites libres de droits, comment les optimiser pour un site rapide.</p></div>
+      <div class="card"><span class="ico">📱</span><b>100 % responsive</b><p>Mobile, tablette, ordinateur. Boutons d'appel directs (clic = appel), SEO de base inclus.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Comment ça marche</p>
+      <h2><span class="silver-text">De l'achat au site en ligne</span></h2>
+    </div>
+    <div class="steps">
+      <div class="step"><small>~ 1 minute</small><b>Téléchargez</b><p>Paiement sécurisé, réception immédiate du kit par email. Ouvrez le fichier : le site fonctionne déjà.</p></div>
+      <div class="step"><small>~ 30 minutes</small><b>Personnalisez</b><p>Suivez la checklist : nom du restaurant, carte, horaires, photos, couleurs. Un simple éditeur de texte suffit.</p></div>
+      <div class="step"><small>~ 15 minutes</small><b>Mettez en ligne</b><p>Hébergement gratuit à vie via GitHub Pages, HTTPS automatique. Guide pas à pas inclus. Facturez votre client.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Pour qui</p>
+      <h2><span class="silver-text">Deux façons de rentabiliser le kit</span></h2>
+    </div>
+    <div class="grid-2">
+      <div class="card"><span class="ico">💼</span><b>Freelances & agences web</b><p>Vendez des sites vitrines 300–800 € à vos clients restaurateurs en livrant en une journée au lieu de deux semaines. Licence clients illimités : le kit est rentabilisé dès la première vente.</p></div>
+      <div class="card"><span class="ico">🍽️</span><b>Restaurateurs débrouillards</b><p>Votre site pro pour 29 € une fois, au lieu de 30 €/mois à vie chez les constructeurs de sites. Vous gardez le contrôle total, sans abonnement ni engagement.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="acheter">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Tarif</p>
+      <h2><span class="silver-text">Un prix. Aucun abonnement.</span></h2>
+    </div>
+    <div class="pricing-card">
+      <p class="eyebrow">Kit Site Restaurant</p>
+      <div class="price">29 €<small> · paiement unique</small></div>
+      <ul>
+        <li>Template HTML complet (démo en ligne)</li>
+        <li>Guide de personnalisation pas à pas</li>
+        <li>Guide de mise en ligne gratuite (GitHub Pages)</li>
+        <li>Guide photos + 3 palettes de couleurs</li>
+        <li>Licence clients illimités</li>
+        <li>Téléchargement immédiat après paiement</li>
+      </ul>
+      <!-- TODO: remplacer # par le lien checkout Lemon Squeezy du produit -->
+      <a class="btn btn-primary" href="#">Obtenir le kit — 29 €</a>
+      <p class="guarantee">Paiement sécurisé via Lemon Squeezy · Facture automatique · TVA gérée</p>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">FAQ</p>
+      <h2><span class="silver-text">Questions fréquentes</span></h2>
+    </div>
+    <div class="faq-list">
+      <details><summary>Faut-il savoir coder ?</summary><p>Non. La personnalisation se fait avec la fonction Rechercher/Remplacer d'un éditeur de texte gratuit (VS Code, Notepad++). Le guide liste exactement quoi chercher et quoi remplacer. Si vous savez remplir un document Word, vous savez personnaliser ce kit.</p></details>
+      <details><summary>L'hébergement est vraiment gratuit ?</summary><p>Oui — GitHub Pages héberge les sites statiques gratuitement, sans limite de durée, avec HTTPS automatique. C'est le même service qu'utilisent des millions de développeurs. Le guide vous accompagne pas à pas. Seule option payante : un nom de domaine personnalisé (~10 €/an), facultatif.</p></details>
+      <details><summary>Je peux l'utiliser pour plusieurs clients ?</summary><p>Oui, la licence autorise un nombre illimité de projets clients. La seule restriction : revendre ou redistribuer le kit lui-même en tant que template.</p></details>
+      <details><summary>Le site marche pour d'autres types de restaurants ?</summary><p>Oui. La carte, les textes et les couleurs se personnalisent entièrement : pizzeria, japonais, brasserie, kebab, gastro... 3 palettes de couleurs prêtes à l'emploi sont incluses pour changer l'ambiance en 2 minutes.</p></details>
+      <details><summary>Les photos de la démo sont incluses ?</summary><p>Non — vous utilisez les vraies photos du restaurant (c'est ce qui rend le site authentique). Le guide inclus vous indique où trouver des photos gratuites libres de droits en attendant, et comment les optimiser.</p></details>
+      <details><summary>Et si j'ai un problème ?</summary><p>Écrivez-nous, réponse sous 48 h ouvrées.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span><b class="silver-text">AVENOR KITS</b> — des sites prêts à livrer.</span>
+    <span>© 2026 Avenor Media · Tous droits réservés</span>
+  </div>
+</footer>
+
+</body>
+</html>
