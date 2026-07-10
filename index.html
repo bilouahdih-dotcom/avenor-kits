@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Avenor Kits — Kit Site Restaurant : un site vitrine pro prêt en 1 heure</title>
-<meta name="description" content="Kit Site Restaurant : template HTML complet + guides de personnalisation et de mise en ligne gratuite. Livrez un site vitrine pro à vos clients restaurateurs en 1 heure, sans abonnement. 29 €, licence clients illimités." />
+<title>Avenor Kits — Kits de sites vitrines pro prêts en 1 heure</title>
+<meta name="description" content="5 kits de sites vitrines (restaurant, fast-food, coiffeur, boulangerie, artisan) : templates HTML complets + guides de personnalisation et de mise en ligne gratuite. Livrez un site pro en 1 heure, sans abonnement. Dès 29 €, licence clients illimités." />
 <style>
   :root{
     --bg:#0a0a0b;
@@ -79,7 +79,18 @@
   .step p{color:var(--muted);font-size:14.5px}
   .step small{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:2px}
 
-  .pricing-card{max-width:480px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:40px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:980px;margin:0 auto;align-items:start}
+  .pricing-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:40px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .pricing-card.featured{border-color:rgba(255,255,255,.25);position:relative}
+  .pricing-card.featured::before{content:"Meilleure valeur";position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(180deg,#fafafa,#c9c9cf);color:#0a0a0b;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 16px;border-radius:999px}
+  .kits-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+  .kit-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;text-align:center;transition:transform .15s,border-color .2s}
+  .kit-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.22)}
+  .kit-card .ico{font-size:34px;display:block;margin-bottom:10px}
+  .kit-card b{display:block;font-size:15px;margin-bottom:4px}
+  .kit-card small{color:var(--muted);font-size:12.5px;display:block;margin-bottom:14px}
+  .kit-card .demo-link{font-size:13px;font-weight:700;color:var(--silver);text-decoration:underline;text-underline-offset:3px}
+  @media(max-width:860px){.pricing-grid{grid-template-columns:1fr}.kits-grid{grid-template-columns:1fr 1fr}}
   .pricing-card .price{font-size:56px;font-weight:800;letter-spacing:-2px;margin:10px 0}
   .pricing-card .price small{font-size:16px;color:var(--muted);font-weight:500;letter-spacing:0}
   .pricing-card ul{list-style:none;text-align:left;margin:26px 0 30px}
@@ -113,21 +124,22 @@
   <div class="wrap nav">
     <a class="brand" href="#"><span class="silver-text">AVENOR KITS</span><small>SITES PRÊTS À LIVRER</small></a>
     <div class="nav-right">
+      <a class="link" href="#kits">Les kits</a>
       <a class="link" href="#contenu">Contenu</a>
       <a class="link" href="#faq">FAQ</a>
-      <a class="btn btn-primary" href="#acheter">Obtenir le kit — 29 €</a>
+      <a class="btn btn-primary" href="#acheter">Voir les tarifs</a>
     </div>
   </div>
 </header>
 
 <section class="hero">
   <div class="wrap">
-    <p class="eyebrow">Kit Site Restaurant · Template HTML + Guides</p>
-    <h1><span class="silver-text">Un site restaurant pro,<br>livré en 1 heure.</span></h1>
-    <p class="lead">Template complet, prêt à personnaliser et à mettre en ligne gratuitement. Pour les freelances qui veulent livrer vite, et les restaurateurs qui veulent un vrai site sans abonnement.</p>
+    <p class="eyebrow">5 kits de sites vitrines · Templates HTML + Guides</p>
+    <h1><span class="silver-text">Un site de commerce pro,<br>livré en 1 heure.</span></h1>
+    <p class="lead">Restaurant, fast-food, coiffeur, boulangerie, artisan : des templates complets, prêts à personnaliser et à mettre en ligne gratuitement. Pour les freelances qui veulent livrer vite, et les commerçants qui veulent un vrai site sans abonnement.</p>
     <div class="hero-actions">
-      <a href="#acheter" class="btn btn-primary">Obtenir le kit — 29 €</a>
-      <a href="demo-restaurant/" target="_blank" rel="noopener" class="btn btn-ghost">Voir la démo en ligne ↗</a>
+      <a href="#acheter" class="btn btn-primary">Voir les tarifs — dès 29 €</a>
+      <a href="#kits" class="btn btn-ghost">Découvrir les 5 kits</a>
     </div>
     <p class="price-hint">Paiement unique · <b>Clients illimités</b> · Téléchargement immédiat</p>
   </div>
@@ -143,6 +155,23 @@
   </div>
 </div>
 
+<section id="kits">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">La collection</p>
+      <h2><span class="silver-text">5 kits, 5 métiers</span></h2>
+      <p>Chaque kit a son design, ses sections et ses textes pensés pour le métier. Testez chaque démo.</p>
+    </div>
+    <div class="kits-grid">
+      <div class="kit-card"><span class="ico">🍽️</span><b>Restaurant</b><small>Design braise, carte par onglets</small><a class="demo-link" href="demo-restaurant/" target="_blank" rel="noopener">Voir la démo ↗</a></div>
+      <div class="kit-card"><span class="ico">🍔</span><b>Fast-food</b><small>Smash burgers, menus, livraison</small><a class="demo-link" href="demo-fastfood/" target="_blank" rel="noopener">Voir la démo ↗</a></div>
+      <div class="kit-card"><span class="ico">💈</span><b>Coiffeur & barbier</b><small>Prestations, tarifs, RDV</small><a class="demo-link" href="demo-coiffeur/" target="_blank" rel="noopener">Voir la démo ↗</a></div>
+      <div class="kit-card"><span class="ico">🥖</span><b>Boulangerie</b><small>Design clair, produits, horaires</small><a class="demo-link" href="demo-boulangerie/" target="_blank" rel="noopener">Voir la démo ↗</a></div>
+      <div class="kit-card"><span class="ico">🔑</span><b>Artisan / Serrurier</b><small>Urgence 24/7, tarifs, zone</small><a class="demo-link" href="demo-artisan/" target="_blank" rel="noopener">Voir la démo ↗</a></div>
+    </div>
+  </div>
+</section>
+
 <section class="alt" id="contenu">
   <div class="wrap">
     <div class="sec-head">
@@ -151,8 +180,8 @@
       <p>Pas juste un template : un système complet, de la personnalisation à la mise en ligne.</p>
     </div>
     <div class="grid-3">
-      <div class="card"><span class="ico">🎨</span><b>Template premium</b><p>Design sombre "braise" avec galerie animée, carte par onglets, avis clients, horaires et carte d'accès. Un seul fichier HTML, zéro dépendance.</p></div>
-      <div class="card"><span class="ico">✏️</span><b>Guide de personnalisation</b><p>Checklist pas à pas : nom, carte du restaurant, horaires, avis, carte d'accès. 30 minutes avec un simple éditeur de texte.</p></div>
+      <div class="card"><span class="ico">🎨</span><b>Template premium</b><p>Design soigné par métier : galerie animée, tarifs par onglets, avis clients, horaires et carte d'accès. Un seul fichier HTML, zéro dépendance.</p></div>
+      <div class="card"><span class="ico">✏️</span><b>Guide de personnalisation</b><p>Checklist pas à pas : nom, prestations ou carte, horaires, avis, carte d'accès. 30 minutes avec un simple éditeur de texte.</p></div>
       <div class="card"><span class="ico">🚀</span><b>Guide de mise en ligne</b><p>Hébergement 100 % gratuit et illimité sur GitHub Pages, HTTPS inclus. Pas à pas avec captures, aucune compétence serveur requise.</p></div>
       <div class="card"><span class="ico">🎨</span><b>3 palettes de couleurs</b><p>Ambiance grill, italien, japonais ou bistrot chic : 3 variables CSS à changer et tout le site suit.</p></div>
       <div class="card"><span class="ico">📷</span><b>Guide photos</b><p>Quelles photos utiliser, où en trouver des gratuites libres de droits, comment les optimiser pour un site rapide.</p></div>
@@ -191,23 +220,40 @@
 <section id="acheter">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">Tarif</p>
+      <p class="eyebrow">Tarifs</p>
       <h2><span class="silver-text">Un prix. Aucun abonnement.</span></h2>
     </div>
-    <div class="pricing-card">
-      <p class="eyebrow">Kit Site Restaurant</p>
-      <div class="price">29 €<small> · paiement unique</small></div>
-      <ul>
-        <li>Template HTML complet (démo en ligne)</li>
-        <li>Guide de personnalisation pas à pas</li>
-        <li>Guide de mise en ligne gratuite (GitHub Pages)</li>
-        <li>Guide photos + 3 palettes de couleurs</li>
-        <li>Licence clients illimités</li>
-        <li>Téléchargement immédiat après paiement</li>
-      </ul>
-      <!-- TODO: remplacer # par le lien checkout Lemon Squeezy du produit -->
-      <a class="btn btn-primary" href="#">Obtenir le kit — 29 €</a>
-      <p class="guarantee">Paiement sécurisé via Lemon Squeezy · Facture automatique · TVA gérée</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <p class="eyebrow">1 kit au choix</p>
+        <div class="price">29 €<small> · paiement unique</small></div>
+        <ul>
+          <li>1 template HTML complet (démo en ligne)</li>
+          <li>Guide de personnalisation pas à pas</li>
+          <li>Guide de mise en ligne gratuite (GitHub Pages)</li>
+          <li>Guide photos + palettes de couleurs</li>
+          <li>Licence clients illimités</li>
+          <li>Téléchargement immédiat après paiement</li>
+        </ul>
+        <!-- TODO: remplacer # par le lien checkout Lemon Squeezy du kit -->
+        <a class="btn btn-ghost" href="#">Choisir mon kit — 29 €</a>
+        <p class="guarantee">Paiement sécurisé via Lemon Squeezy · Facture automatique · TVA gérée</p>
+      </div>
+      <div class="pricing-card featured">
+        <p class="eyebrow">Bundle — les 5 kits</p>
+        <div class="price">79 €<small> · au lieu de 145 €</small></div>
+        <ul>
+          <li>Les 5 kits : restaurant, fast-food, coiffeur, boulangerie, artisan</li>
+          <li>2 architectures de design (sombre & clair)</li>
+          <li>Tous les guides inclus pour chaque kit</li>
+          <li>Licence clients illimités sur les 5 kits</li>
+          <li>Couvre l'essentiel des commerces à démarcher</li>
+          <li>Téléchargement immédiat après paiement</li>
+        </ul>
+        <!-- TODO: remplacer # par le lien checkout Lemon Squeezy du bundle -->
+        <a class="btn btn-primary" href="#">Obtenir le bundle — 79 €</a>
+        <p class="guarantee">Rentabilisé dès le premier site client vendu</p>
+      </div>
     </div>
   </div>
 </section>
@@ -222,7 +268,7 @@
       <details><summary>Faut-il savoir coder ?</summary><p>Non. La personnalisation se fait avec la fonction Rechercher/Remplacer d'un éditeur de texte gratuit (VS Code, Notepad++). Le guide liste exactement quoi chercher et quoi remplacer. Si vous savez remplir un document Word, vous savez personnaliser ce kit.</p></details>
       <details><summary>L'hébergement est vraiment gratuit ?</summary><p>Oui — GitHub Pages héberge les sites statiques gratuitement, sans limite de durée, avec HTTPS automatique. C'est le même service qu'utilisent des millions de développeurs. Le guide vous accompagne pas à pas. Seule option payante : un nom de domaine personnalisé (~10 €/an), facultatif.</p></details>
       <details><summary>Je peux l'utiliser pour plusieurs clients ?</summary><p>Oui, la licence autorise un nombre illimité de projets clients. La seule restriction : revendre ou redistribuer le kit lui-même en tant que template.</p></details>
-      <details><summary>Le site marche pour d'autres types de restaurants ?</summary><p>Oui. La carte, les textes et les couleurs se personnalisent entièrement : pizzeria, japonais, brasserie, kebab, gastro... 3 palettes de couleurs prêtes à l'emploi sont incluses pour changer l'ambiance en 2 minutes.</p></details>
+      <details><summary>Un kit marche pour d'autres métiers proches ?</summary><p>Oui. Les textes, sections et couleurs se personnalisent entièrement : le kit restaurant convient à une pizzeria ou une brasserie, le kit artisan à un plombier ou un électricien, le kit coiffeur à un institut de beauté... Des palettes de couleurs prêtes à l'emploi sont incluses pour changer l'ambiance en 2 minutes.</p></details>
       <details><summary>Les photos de la démo sont incluses ?</summary><p>Non — vous utilisez les vraies photos du restaurant (c'est ce qui rend le site authentique). Le guide inclus vous indique où trouver des photos gratuites libres de droits en attendant, et comment les optimiser.</p></details>
       <details><summary>Et si j'ai un problème ?</summary><p>Écrivez-nous, réponse sous 48 h ouvrées.</p></details>
     </div>
