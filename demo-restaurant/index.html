@@ -558,5 +558,178 @@
     });
   });
 </script>
+<!-- AVENOR-EDITOR -->
+<style id="av-css">
+  #av-bar{position:fixed;top:0;left:0;right:0;z-index:2147483000;background:#12141c;color:#fff;
+    display:flex;align-items:center;gap:10px;padding:10px 16px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    font-size:13px;box-shadow:0 4px 20px rgba(0,0,0,.4);flex-wrap:wrap}
+  #av-bar .av-hint{opacity:.75;margin-right:auto}
+  #av-bar button{border:none;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer}
+  #av-bar .av-save{background:#22c55e;color:#06220f}
+  #av-bar .av-btn{background:rgba(255,255,255,.12);color:#fff}
+  #av-bar .av-quit{background:rgba(255,80,80,.2);color:#ffb3b3}
+  body.av-editing{padding-top:52px !important}
+  body.av-editing header{top:52px !important}
+  body.av-editing [contenteditable="true"] :focus{outline:2px dashed #22c55e}
+  #av-modal{position:fixed;inset:0;z-index:2147483001;background:rgba(10,12,18,.72);display:flex;align-items:center;justify-content:center;padding:20px}
+  #av-modal .av-card{background:#fff;color:#1c1e24;border-radius:16px;max-width:480px;width:100%;padding:28px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:14.5px;line-height:1.6;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  #av-modal h3{margin:0 0 10px;font-size:18px}
+  #av-modal p{margin:10px 0}
+  #av-modal a{color:#4f46e5;font-weight:700}
+  #av-modal .av-file{display:inline-block;background:#4f46e5;color:#fff;border-radius:10px;padding:11px 18px;font-weight:700;cursor:pointer;margin:6px 0}
+  #av-modal input[type=file]{display:none}
+  #av-modal .av-close{background:#eef0f6;border:none;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer;margin-top:8px}
+  #av-modal small{color:#5c6270;display:block;margin-top:10px}
+</style>
+<script>
+(function () {
+  if (location.hash.indexOf('edition') === -1) return;
+
+  var PEXELS = 'https://www.pexels.com/fr-fr/chercher/restaurant%20plat/';
+  var UNSPLASH = 'https://unsplash.com/s/photos/restaurant-food';
+
+  function el(tag, attrs, html) {
+    var e = document.createElement(tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (html) e.innerHTML = html;
+    return e;
+  }
+
+  // ----- Barre d'outils -----
+  var bar = el('div', { id: 'av-bar', contenteditable: 'false' },
+    '<span class="av-hint">✏️ <b>Mode édition</b> — cliquez sur un texte pour le modifier, sur une photo pour la remplacer.</span>' +
+    '<button class="av-btn" id="av-phone">📞 Téléphone</button>' +
+    '<button class="av-btn" id="av-help">❓ Aide</button>' +
+    '<button class="av-save" id="av-save">💾 Enregistrer mon site</button>' +
+    '<button class="av-quit" id="av-quit">✖ Quitter</button>');
+  document.body.appendChild(bar);
+  document.body.classList.add('av-editing');
+  document.body.setAttribute('contenteditable', 'true');
+  document.body.setAttribute('spellcheck', 'false');
+
+  // ----- Modal générique -----
+  function modal(html) {
+    closeModal();
+    var m = el('div', { id: 'av-modal', contenteditable: 'false' }, '<div class="av-card">' + html + '</div>');
+    m.addEventListener('click', function (e) { if (e.target === m) closeModal(); });
+    document.body.appendChild(m);
+    return m;
+  }
+  function closeModal() {
+    var m = document.getElementById('av-modal');
+    if (m) m.remove();
+  }
+
+  // ----- Remplacement de photo -----
+  var photoTarget = null;
+  function openPhotoModal(target) {
+    photoTarget = target;
+    var m = modal(
+      '<h3>📷 Remplacer cette photo</h3>' +
+      '<p><label class="av-file">Choisir une photo sur mon ordinateur<input type="file" id="av-file" accept="image/*"></label></p>' +
+      '<p>Pas encore de photo ? Banques d\'images <b>gratuites</b> (usage commercial autorisé) :</p>' +
+      '<p>👉 <a href="' + PEXELS + '" target="_blank" rel="noopener">Pexels — photos de votre secteur</a><br>' +
+      '👉 <a href="' + UNSPLASH + '" target="_blank" rel="noopener">Unsplash — photos de votre secteur</a></p>' +
+      '<small>Téléchargez une photo depuis l\'un de ces sites, puis revenez cliquer sur « Choisir une photo ». ' +
+      'Astuce : compressez-la d\'abord sur <a href="https://squoosh.app" target="_blank" rel="noopener">squoosh.app</a> (visez moins de 300 Ko) pour un site rapide.</small>' +
+      '<p><button class="av-close" id="av-cancel">Annuler</button></p>');
+    m.querySelector('#av-file').addEventListener('change', function () {
+      var f = this.files && this.files[0];
+      if (!f) return;
+      var r = new FileReader();
+      r.onload = function () {
+        if (photoTarget.tagName === 'IMG') {
+          photoTarget.src = r.result;
+        } else {
+          photoTarget.style.backgroundImage = 'url(' + r.result + ')';
+          photoTarget.style.backgroundSize = 'cover';
+          photoTarget.style.backgroundPosition = 'center';
+        }
+        closeModal();
+      };
+      r.readAsDataURL(f);
+    });
+    m.querySelector('#av-cancel').addEventListener('click', closeModal);
+  }
+
+  // ----- Clics : photos, liens -----
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('#av-bar') || e.target.closest('#av-modal')) return;
+    var img = e.target.closest('img');
+    if (img) { e.preventDefault(); e.stopPropagation(); openPhotoModal(img); return; }
+    var t = e.target;
+    if (t !== document.body && t.tagName !== 'HTML') {
+      var bg = getComputedStyle(t).backgroundImage;
+      if (bg && bg.indexOf('url(') > -1) { e.preventDefault(); e.stopPropagation(); openPhotoModal(t); return; }
+    }
+    var a = e.target.closest('a');
+    if (a) e.preventDefault(); // pas de navigation en mode édition
+  }, true);
+
+  // ----- Téléphone -----
+  document.getElementById('av-phone').addEventListener('click', function () {
+    var shown = prompt('Numéro de téléphone à afficher (ex : 01 23 45 67 89) :');
+    if (!shown) return;
+    var intl = prompt('Le même numéro au format international pour le lien d\'appel,\nsans espaces (ex : +33123456789) :');
+    if (!intl) return;
+    var links = document.querySelectorAll('a[href^="tel:"]');
+    for (var i = 0; i < links.length; i++) {
+      links[i].setAttribute('href', 'tel:' + intl.replace(/\s/g, ''));
+      if (/\d/.test(links[i].textContent)) links[i].textContent = '📞 ' + shown;
+    }
+    var m = modal('<h3>✅ Téléphone mis à jour</h3><p>' + links.length + ' bouton(s) d\'appel mis à jour. Pensez aussi à modifier le numéro là où il apparaît en texte (pied de page, section contact) en cliquant dessus.</p><p><button class="av-close" id="av-ok">OK</button></p>');
+    m.querySelector('#av-ok').addEventListener('click', closeModal);
+  });
+
+  // ----- Aide -----
+  document.getElementById('av-help').addEventListener('click', function () {
+    var m = modal(
+      '<h3>❓ Comment ça marche</h3>' +
+      '<p>✏️ <b>Textes</b> : cliquez sur n\'importe quel texte et tapez directement.</p>' +
+      '<p>📷 <b>Photos</b> : cliquez sur une photo pour la remplacer par la vôtre, ou par une photo gratuite (Pexels, Unsplash — liens fournis).</p>' +
+      '<p>📞 <b>Téléphone</b> : bouton en haut, il met à jour tous les boutons d\'appel d\'un coup.</p>' +
+      '<p>💾 <b>Enregistrer</b> : télécharge votre site terminé (fichier index.html). Remplacez l\'ancien fichier du dossier par celui-ci.</p>' +
+      '<p>Pour les couleurs, ajouter des éléments à la carte ou changer la carte d\'accès : voir le guide PERSONNALISATION.</p>' +
+      '<p><button class="av-close" id="av-ok2">Compris</button></p>');
+    m.querySelector('#av-ok2').addEventListener('click', closeModal);
+  });
+
+  // ----- Enregistrer -----
+  document.getElementById('av-save').addEventListener('click', function () {
+    var root = document.documentElement.cloneNode(true);
+    var junk = root.querySelectorAll('#av-bar, #av-modal');
+    for (var i = 0; i < junk.length; i++) junk[i].remove();
+    var b = root.querySelector('body');
+    b.removeAttribute('contenteditable');
+    b.removeAttribute('spellcheck');
+    b.classList.remove('av-editing');
+    var html = '<!DOCTYPE html>\n' + root.outerHTML;
+    var blob = new Blob([html], { type: 'text/html' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'index.html';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    var m = modal(
+      '<h3>💾 Site enregistré !</h3>' +
+      '<p>Un fichier <b>index.html</b> vient d\'être téléchargé (dossier <b>Téléchargements</b>).</p>' +
+      '<p>Dernière étape : <b>glissez-le dans le dossier du kit</b> pour remplacer l\'ancien index.html. Votre site est prêt à être mis en ligne (voir GUIDE-DEPLOIEMENT).</p>' +
+      '<p>Vous pourrez le modifier à nouveau quand vous voulez avec MODIFIER-MON-SITE.html.</p>' +
+      '<p><button class="av-close" id="av-ok3">OK</button></p>');
+    m.querySelector('#av-ok3').addEventListener('click', closeModal);
+  });
+
+  // ----- Quitter -----
+  document.getElementById('av-quit').addEventListener('click', function () {
+    if (confirm('Quitter le mode édition ?\nLes modifications non enregistrées seront perdues.')) {
+      location.href = location.pathname;
+    }
+  });
+})();
+</script>
+<!-- /AVENOR-EDITOR -->
+
 </body>
 </html>
