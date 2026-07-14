@@ -1,0 +1,8 @@
+{
+  "name": "avenor-kits-tools",
+  "private": true,
+  "description": "Scripts de build des kits : guides md->html, injection éditeur visuel",
+  "dependencies": {
+    "marked": "^15.0.0"
+  }
+}
